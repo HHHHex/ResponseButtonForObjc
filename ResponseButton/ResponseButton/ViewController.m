@@ -29,6 +29,9 @@
     _button.center = self.view.center;
     [_button addTarget:self action:@selector(tap:) forControlEvents:UIControlEventTouchUpInside];
     [_button setTitlesNormal:@"normal" waiting:@"waiting" disable:@"disable"];
+    [_button setTimeOut:10 complete:^(RSButton *sender) {
+        NSLog(@"button time out");
+    }];
 }
 
 

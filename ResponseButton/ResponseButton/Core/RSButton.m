@@ -101,7 +101,7 @@ typedef void(^Block)(RSButton *);
 
 - (void)countTime {
     if (_count == 0) {
-        _count = _timeOut;
+        [self stopRun];
         self.rsState = RSStateNormal;
         if (_block) { _block(self); }
     } else {
@@ -124,13 +124,13 @@ typedef void(^Block)(RSButton *);
     }
 }
 - (void)stopRun {
-    if (_rsStyle == RSStyleCount) {
-        if (_timer != nil) {
-            [_timer invalidate];
-            _timer = nil;
-        }
-    } else if (_rsStyle == RSStyleActive) {
+    if (_rsStyle == RSStyleActive) {
         [self.active stopAnimating];
+    }
+    if (_timer != nil) {
+        _count = _timeOut;
+        [_timer invalidate];
+        _timer = nil;
     }
 }
 
